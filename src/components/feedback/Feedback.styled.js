@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
+export const FeedbackButton = styled.button`
   text-decoration: none;
   display: inline-block;
   width: 220px;

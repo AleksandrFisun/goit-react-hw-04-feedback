@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import FeedbackOptions from './feedback/Feedback';
+import { FeedbackOptions } from './feedback/Feedback';
 import { SectionWrap } from './wrap/SectionWrap';
 import Statistics from './statistick/Statistick';
 import { AppWrap } from './App.styled';
@@ -11,9 +11,19 @@ export class App extends Component {
     bad: 0,
   };
 
-  incrementOption = e => {
+  handleClickGood = () => {
     this.setState(prevState => ({
-      [e]: prevState[e] + 1,
+      good: prevState.good + 1,
+    }));
+  };
+  handleClickNeutral = () => {
+    this.setState(prevState => ({
+      neutral: prevState.neutral + 1,
+    }));
+  };
+  handleClickBad = () => {
+    this.setState(prevState => ({
+      bad: prevState.bad + 1,
     }));
   };
 
@@ -23,9 +33,9 @@ export class App extends Component {
   }
 
   countPositiveFeedbackPercentage() {
-    const { bad } = this.state;
+    const { bad, neutral } = this.state;
     const total = this.countTotalFeedback();
-    return Math.round(((total - bad) / total) * 100) || 0;
+    return Math.round(((total - bad - neutral) / total) * 100) || 0;
   }
 
   render() {
@@ -37,8 +47,9 @@ export class App extends Component {
       <AppWrap>
         <SectionWrap title={'Pleace leave feedback'}>
           <FeedbackOptions
-            options={this.state}
-            onLeaveFeedback={this.incrementOption}
+            onClickGood={this.handleClickGood}
+            onClickNeutral={this.handleClickNeutral}
+            onClickBad={this.handleClickBad}
           />
         </SectionWrap>
         <SectionWrap title="Statistics">
