@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { FeedbackOptions } from './feedback/Feedback';
+import FeedbackOptions from './feedback/Feedback';
 import { SectionWrap } from './wrap/SectionWrap';
 import Statistics from './statistick/Statistick';
 import { AppWrap } from './App.styled';

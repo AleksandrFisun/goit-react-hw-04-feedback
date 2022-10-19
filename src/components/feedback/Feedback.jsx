@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
-
 import { FeedbackButton } from './Feedback.styled';
 
-export const FeedbackOptions = ({
-  onClickGood,
-  onClickNeutral,
-  onClickBad,
-}) => {
+const FeedbackOptions = ({ onClickGood, onClickNeutral, onClickBad }) => {
   return (
     <>
       <FeedbackButton type="button" onClick={onClickGood}>
@@ -23,9 +18,9 @@ export const FeedbackOptions = ({
     </>
   );
 };
-
-FeedbackOptions.prototype = {
-  onClickGood: PropTypes.func,
-  onClickNeutral: PropTypes.func,
-  onClickBad: PropTypes.func,
+FeedbackOptions.propTypes = {
+  onClickGood: PropTypes.func.isRequired,
+  onClickNeutral: PropTypes.func.isRequired,
+  onClickBad: PropTypes.func.isRequired,
 };
+export default FeedbackOptions;
