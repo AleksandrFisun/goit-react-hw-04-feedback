@@ -19,8 +19,8 @@ const FeedbackOptions = ({ onClickGood, onClickNeutral, onClickBad }) => {
   );
 };
 FeedbackOptions.propTypes = {
-  onClickGood: PropTypes.func.isRequired,
-  onClickNeutral: PropTypes.func.isRequired,
-  onClickBad: PropTypes.func.isRequired,
+  onClickGood: PropTypes.func,
+  onClickNeutral: PropTypes.func,
+  onClickBad: PropTypes.func,
 };
 export default FeedbackOptions;
