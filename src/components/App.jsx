@@ -15,6 +15,7 @@ export class App extends Component {
     this.setState(lastState => {
       return { [name]: lastState[name] + 1 };
     });
+    console.log(Object.keys(this.state));
   };
 
   countTotalFeedback() {
