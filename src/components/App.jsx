@@ -1,61 +1,55 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import FeedbackOptions from './feedback/Feedback';
 import { SectionWrap } from './wrap/SectionWrap';
 import Statistics from './statistick/Statistick';
 import { AppWrap } from './App.styled';
 
-export class App extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+export const App = () => {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+
+  const leaveFeadback = name => {
+    switch (name) {
+      case 'good':
+        setGood(state => state + 1);
+        break;
+      case 'neutral':
+        setNeutral(state => state + 1);
+        break;
+      case 'bad':
+        setBad(state => state + 1);
+        break;
+      default:
+        break;
+    }
+  };
+  const totalFeedback = good + bad + neutral;
+  const countPositiveFeedbackPercentage = () => {
+    return Math.round((100 / totalFeedback) * good);
   };
 
-  leaveFeadback = name => {
-    this.setState(lastState => {
-      return { [name]: lastState[name] + 1 };
-    });
-    console.log(Object.keys(this.state));
-  };
-
-  countTotalFeedback() {
-    const { good, bad, neutral } = this.state;
-    return good + bad + neutral;
-  }
-
-  countPositiveFeedbackPercentage() {
-    const { bad, neutral } = this.state;
-    const total = this.countTotalFeedback();
-    return Math.round(((total - bad - neutral) / total) * 100) || 0;
-  }
-
-  render() {
-    const { good, neutral, bad } = this.state;
-    const positive = this.countPositiveFeedbackPercentage();
-    const total = this.countTotalFeedback();
-
-    return (
-      <AppWrap>
-        <SectionWrap title={'Pleace leave feedback'}>
-          <FeedbackOptions
-            options={Object.keys(this.state)}
-            onLeaveFeedback={this.leaveFeadback}
+  return (
+    <AppWrap>
+      <SectionWrap title={'Pleace leave feedback'}>
+        <FeedbackOptions
+          options={['good', 'neutral', 'bad']}
+          onLeaveFeedback={leaveFeadback}
+        />
+      </SectionWrap>
+      <SectionWrap title="Statistics">
+        {totalFeedback ? (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={totalFeedback}
+            positive={countPositiveFeedbackPercentage}
           />
-        </SectionWrap>
-        <SectionWrap title="Statistics">
-          {total ? (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={total}
-              positive={positive}
-            />
-          ) : (
-            <p>Leave your feedback</p>
-          )}
-        </SectionWrap>
-      </AppWrap>
-    );
-  }
-}
+        ) : (
+          <p>Leave your feedback</p>
+        )}
+      </SectionWrap>
+    </AppWrap>
+  );
+};
