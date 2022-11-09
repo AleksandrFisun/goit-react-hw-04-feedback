@@ -13,8 +13,7 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   );
 };
 FeedbackOptions.propTypes = {
-  onClickGood: PropTypes.func,
-  onClickNeutral: PropTypes.func,
-  onClickBad: PropTypes.func,
+  options: PropTypes.array.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
 export default FeedbackOptions;

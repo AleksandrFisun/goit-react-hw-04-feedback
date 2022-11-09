@@ -33,7 +33,7 @@ export const App = () => {
     <AppWrap>
       <SectionWrap title={'Pleace leave feedback'}>
         <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
+          options={Object.keys({ good, neutral, bad })}
           onLeaveFeedback={leaveFeadback}
         />
       </SectionWrap>
